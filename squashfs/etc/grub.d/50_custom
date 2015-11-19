@@ -1,0 +1,14 @@
+#!/bin/sh
+exec tail -n +3 $0
+# This file provides an easy way to add custom menu entries.  Simply type the
+# menu entries you want to add after this comment.  Be careful not to change
+# the 'exec tail' line above.
+
+menuentry "Pureos-2.0 Setup" {
+set isofile="/opt/PureOS-21.0.iso"
+loopback loop (hd0,1)$isofile
+linux (loop)/install/gtk/vmlinuz video=vesa:ywrap,mtrr vga=788 iso-scan/filename=${isofile} auto=true file=/preseed.cfg hostname=purism domain=purism
+initrd (loop)/install/gtk/initrd.gz
+}
+
+
